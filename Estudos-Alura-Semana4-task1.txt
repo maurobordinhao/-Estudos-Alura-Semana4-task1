@@ -1,0 +1,54 @@
+# -Estudos-Alura-Semana4-task1
+
+(Os dados abaixo são de teste com finalidade de estudo, não se tratam de dados pessoais verdadeiros ou credenciais válidas)
+
+0 - Criação do .env com as credenciais de teste na raiz do projeto
+
+1 - Subindo os containers por meio do docker compose: docker compose up -d 
+
+2 - npm install
+
+3 - npm start
+
+4 - Conectando no container e adicionando ao Mysql os dados dos dois pacientes fictícios.
+
+$ docker ps
+CONTAINER ID   IMAGE          COMMAND                  CREATED             STATUS             PORTS                                                    NAMES
+5d222099a316   mysql:latest   "docker-entrypoint.s…"   About an hour ago   Up About an hour   33060/tcp, 0.0.0.0:3307->3306/tcp, [::]:3307->3306/tcp   med-app-express-db-1
+f0e8a0c17733   redis:7        "docker-entrypoint.s…"   About an hour ago   Up About an hour   0.0.0.0:6379->6379/tcp, [::]:6379->6379/tcp              med-app-express-redis-1
+
+$ docker exec -it 5d222099a316 bash
+bash-5.1# mysql -uroot -p12345
+mysql: [Warning] Using a password on the command line interface can be insecure.
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 11
+Server version: 9.3.0 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2025, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use testemed;
+
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+mysql> INSERT INTO paciente (id, cpf, nome, email, estaAtivo, senha, telefone, possuiPlanoSaude, planosSaude, historico, imagemUrl, role)
+    -> VALUES
+    ->   (uuid(), '78160552002', 'Emerson Laranja', 'emerson@email.com', true, 'Senh@forte123', '34999335522', true, '[2]', "['sinusite,moderado']", 'https://img.freepik.com/fotos-gratis/designer-trabalhando-no-modelo-3d_23-2149371896.jpg', 'PACIENTE'),
+    ->   (uuid(), '12345678904', 'Joana Silva', 'joana@email.com', true, 'MinhaSenha123', '34999887766', true, '[1, 3]', "['rinite,leve', 'asma,mdio']", 'https://img.freepik.com/fotos-premium/retrato-de-uma-jovem-brasileira-sorridente-em-um-vestido-mexicano-ai-gerado_632984-139.jpg', 'PACIENTE');
+Query OK, 2 rows affected (0.106 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql>
+
+No caso do arquivo json, precisei substituir DE: localhost PARA: 192.168.3.13, que é o ip do linux remoto que eu estava testando.
+
+O acesso: http://192.168.3.13:3000/paciente teve o retorno desses 2 pacientes que foram inseridos no Mysql anteiormente, conforme o print anexado na raiz do projeto.
+
+
+
