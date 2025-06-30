@@ -46,9 +46,8 @@ Records: 2  Duplicates: 0  Warnings: 0
 
 mysql>
 
-No caso do arquivo json, precisei substituir DE: localhost PARA: 192.168.3.13, que é o ip do linux remoto que eu estava testando.
+No caso do arquivo json, precisei editá-lo e substituir DE: localhost PARA: 192.168.3.13, que é o ip da vm linux que usei nesse teste.
 
-O acesso: http://192.168.3.13:3000/paciente teve o retorno desses 2 pacientes que foram inseridos no Mysql anteiormente, conforme o print anexado na raiz do projeto.
-
+Depois do import ao insomnia, o acesso: http://192.168.3.13:3000/paciente teve o retorno dos 2 pacientes, conforme o print anexado na raiz do projeto.
 
 
